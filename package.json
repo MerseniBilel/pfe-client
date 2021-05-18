@@ -24,6 +24,7 @@
     "chart.js": "2.9.3",
     "classnames": "2.2.6",
     "faker": "4.1.0",
+    "lottie-web": "^5.7.8",
     "moment": "^2.29.1",
     "react": "^16.13.1",
     "react-chartjs-2": "2.9.0",
@@ -93,5 +94,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy":"http://localhost:5000"
+  "proxy": "http://127.0.0.1:5000"
 }

@@ -50,7 +50,6 @@ function AdminDashboard(props) {
   }, [page])
 
 
-
   return (
     
     
@@ -100,7 +99,7 @@ function AdminDashboard(props) {
         <Table>
           <TableHeader>
             <tr>
-              <TableCell>Client's Project</TableCell>
+              <TableCell>Project Owner</TableCell>
               <TableCell>Project Name</TableCell>
               <TableCell>Project Status</TableCell>
               <TableCell>Project Started Date</TableCell>
@@ -111,10 +110,10 @@ function AdminDashboard(props) {
               <TableRow key={i}>
                 <TableCell>
                   <div className="flex items-center text-sm">
-                    <Avatar className="hidden mr-3 md:block" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="User image" />
+                    <Avatar className="hidden mr-3 md:block" src={user.projectOwner.avatar} alt="User image" />
                     <div>
-                      <p className="font-semibold">{user.projectOwner}</p>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">The Project Owner</p>
+                      <p className="font-semibold">{user.projectOwner.email}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">{ user.projectOwner.name + ' ' + user.projectOwner.lastname }</p>
                     </div>
                   </div>
                 </TableCell>

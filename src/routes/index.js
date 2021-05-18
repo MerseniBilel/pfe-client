@@ -18,7 +18,7 @@ const Blank = lazy(() => import('../pages/Blank'))
  * If you're looking for the links rendered in the SidebarContent, go to
  * `routes/sidebar.js`
  */
-const routes = [
+export const routes = [
   {
     path: '/dashboard', // the url
     component: Dashboard, // view rendered
@@ -45,4 +45,28 @@ const routes = [
   },
 ]
 
-export default routes
+export const projectOwnerRoutes=[
+  {
+    path: '/projects',
+    component: Project,
+    
+  },
+  {
+    path:'teams',
+    component: Blank,
+  },
+  {
+    path:'settings',
+    component: Blank,
+  }
+]
+
+export const UserRoutes = [
+  {
+    path: '/projects',
+    component: Project,
+    
+  }
+]
+
+

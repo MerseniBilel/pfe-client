@@ -1,12 +1,12 @@
 export const doughnutLegends = [
-  { title: 'Shirts', color: 'bg-blue-500' },
-  { title: 'Shoes', color: 'bg-teal-600' },
-  { title: 'Bags', color: 'bg-purple-600' },
+  { title: '1', color: 'bg-blue-500' },
+  { title: '2', color: 'bg-teal-600' },
+  { title: '3', color: 'bg-purple-600' },
 ]
 
 export const lineLegends = [
-  { title: 'Organic', color: 'bg-teal-600' },
-  { title: 'Paid', color: 'bg-purple-600' },
+  { title: 'Added users', color: 'bg-teal-600' },
+  { title: 'completed projects', color: 'bg-purple-600' },
 ]
 
 export const barLegends = [
@@ -27,7 +27,7 @@ export const doughnutOptions = {
         label: 'Dataset 1',
       },
     ],
-    labels: ['Shoes', 'Shirts', 'Bags'],
+    labels: ['1', '2', '3'],
   },
   options: {
     responsive: true,
@@ -50,7 +50,7 @@ export const lineOptions = {
          */
         backgroundColor: '#0694a2',
         borderColor: '#0694a2',
-        data: [43, 48, 40, 54, 67, 73, 70],
+        data: [3, 3, 4, 5, 3, 6, 7],
         fill: false,
       },
       {
@@ -62,7 +62,7 @@ export const lineOptions = {
          */
         backgroundColor: '#7e3af2',
         borderColor: '#7e3af2',
-        data: [24, 50, 64, 74, 52, 51, 65],
+        data: [2, 5, 6, 7, 5, 5, 6],
       },
     ],
   },

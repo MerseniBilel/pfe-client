@@ -27,6 +27,8 @@ import { ReactComponent as OutlinePersonIcon } from './outlinePerson.svg'
 import { ReactComponent as OutlineCogIcon } from './outlineCog.svg'
 import { ReactComponent as OutlineLogoutIcon } from './outlineLogout.svg'
 import { ReactComponent as SettingIcon } from './setting.svg'
+import { ReactComponent as PasswordIcon } from './password.svg'
+import { ReactComponent as InfoIcon } from './info.svg'
 
 
 export {
@@ -58,5 +60,7 @@ export {
   OutlinePersonIcon,
   OutlineCogIcon,
   OutlineLogoutIcon,
-  SettingIcon
+  SettingIcon,
+  PasswordIcon,
+  InfoIcon
 }
