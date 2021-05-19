@@ -8,11 +8,13 @@ import PropTypes from 'prop-types'
 
 import AlertComponent from '../components/AlertComponent';
 
+import redirectHandler from './redirectHandler';
+
 import ImageLight from '../assets/img/login-office.jpeg';
 import ImageDark from '../assets/img/login-office-dark.jpeg';
 import { Label, Input, Button,HelperText } from '@windmill/react-ui';
 
-function Login({ setAlert,LoginUser,isAuth }) {
+function Login({ setAlert,LoginUser,isAuth,userInfo,isloading }) {
 
   const [formData, setformData] = useState({
     email:'',
@@ -31,9 +33,10 @@ function Login({ setAlert,LoginUser,isAuth }) {
 
   //redirect if logged in 
 
-  if(isAuth){
-    return <Redirect to="/app" />
-  }
+if(isAuth){
+    return <Redirect to="/app/redirecthandler" /> 
+}
+
 
 
   return (
@@ -100,11 +103,15 @@ function Login({ setAlert,LoginUser,isAuth }) {
 Login.propTypes = {
   setAlert: PropTypes.func.isRequired,
   LoginUser: PropTypes.func.isRequired,
-  isAuth : PropTypes.bool
+  isAuth : PropTypes.bool,
+  userInfo : PropTypes.object,
+  isloading : PropTypes.bool,
 }
 
 const mapStateToProps = state => ({
-  isAuth: state.auth.isAuthenticated
+  isAuth: state.auth.isAuthenticated,
+  userInfo : state.auth.user,
+  isloading : state.auth.loading
 });
 
 

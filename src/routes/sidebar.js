@@ -5,7 +5,7 @@
  * If you're looking to actual Router routes, go to
  * `routes/index.js`
  */
-const routes = [
+export const adminroutes = [
   {
     path: '/app/dashboard', // the url
     icon: 'HomeIcon', // the component being exported from icons/index.js
@@ -26,33 +26,36 @@ const routes = [
     icon: 'SettingIcon',
     name: 'Setting',
   },
+]
+
+export const projectownerroutes = [
   {
-    icon: 'PagesIcon',
-    name: 'Pages',
-    routes: [
-      // submenu
-      {
-        path: '/login',
-        name: 'Login',
-      },
-      {
-        path: '/create-account',
-        name: 'Create account',
-      },
-      {
-        path: '/forgot-password',
-        name: 'Forgot password',
-      },
-      {
-        path: '/app/404',
-        name: '404',
-      },
-      {
-        path: '/app/blank',
-        name: 'Blank',
-      },
-    ],
+    path: '/app/projects',
+    icon: 'FormsIcon',
+    name: 'Projects',
+  },
+  {
+    path: '/app/users',
+    icon: 'CardsIcon',
+    name: 'Users',
+  },
+  {
+    path: '/app/setting',
+    icon: 'SettingIcon',
+    name: 'Setting',
   },
 ]
 
-export default routes
+export const teammemberroutes = [
+  {
+    path: '/app/projects',
+    icon: 'FormsIcon',
+    name: 'Projects',
+  },
+  {
+    path: '/app/setting',
+    icon: 'SettingIcon',
+    name: 'Setting',
+  },
+]
+

@@ -11,7 +11,9 @@ import { SidebarContext } from '../context/SidebarContext'
 
 const Page404 = lazy(() => import('../pages/404'))
 
-function Layout() {
+function Layout(props) {
+
+
 
   const { isSidebarOpen, closeSidebar } = useContext(SidebarContext)
   let location = useLocation()
@@ -42,7 +44,7 @@ function Layout() {
                   />
                 ) : null
               })}
-              <Redirect exact from="/app" to="/app/dashboard" />
+              
               <Route component={Page404} />
             </Switch>
              
@@ -54,5 +56,6 @@ function Layout() {
     </div>
   )
 }
+ 
 
 export default Layout
