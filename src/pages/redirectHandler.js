@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom'
 
 const redirectHandler = (props) => {
     if(!props.isLoading){
-        switch(props.userRole){
+        switch(props.userRole.role){
             case 1:
                 return <Redirect to="/app/projects" />;
             case 2:
@@ -16,7 +16,7 @@ const redirectHandler = (props) => {
 }
 
 const mapStateToProps = state => ({
-    userRole:state.auth.user.role,
+    userRole:state.auth.user,
     isLoading : state.auth.loading
 }) 
 export default connect(mapStateToProps)(redirectHandler)
