@@ -1,15 +1,19 @@
 import React,{useState,useEffect} from 'react'
 import Select from 'react-select'
-// redux stuff
 
+// redux stuff
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types'
+import {addProject} from '../actions/project';
 
 import PageTitle from './Typography/PageTitle'
 import SectionTitle from './Typography/SectionTitle'
 import { Card, CardBody,Avatar, Button,Modal, ModalHeader, ModalBody, ModalFooter,Label, Input,Textarea} from '@windmill/react-ui'
 import ProjectCard from './Cards/InfoCard';
-import e from 'cors'
+import DashboardAlert from './DashboardAlert'
 
-const AdminProjects = ({projectsData,logedinuser,usersData}) => {
+
+const AdminProjects = ({projectsData,logedinuser,usersData,addProject}) => {
   
   
 
@@ -20,29 +24,26 @@ const AdminProjects = ({projectsData,logedinuser,usersData}) => {
   const [formData, setformData] = useState({
     projectName:'',
     projectDesc:'',
+    projectOwner:logedinuser._id
   })
 
 
   useEffect(() => {
-    setusersOptions(usersData.map(u => {
-      return {
-        label:<div className="flex justify-between">
-          <img className="flex-shrink-0 h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"/>
-          <span className="text-gray-700">{u.email}</span>
-        </div>,
-        value:u._id
-      }
+    /* state.filter(alert => alert.id !== payload); */
+    const filtreduser = usersData.filter(u => u.role == 2);
+    setusersOptions(filtreduser.map(u => {
+        return {
+          label:<div className="flex justify-between">
+            <img className="flex-shrink-0 h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"/>
+            <span className="text-gray-700">{u.email + " ==> " +u._id}</span>
+          </div>,
+          value:u._id
+        }
     }))
   }, [])
 
-  console.log(usersOptions);
 
 
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
 
   const handleChange = (e) => {
     setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
@@ -51,9 +52,10 @@ const AdminProjects = ({projectsData,logedinuser,usersData}) => {
 
   const onSubmit = e => {
 
+    const { projectName, projectDesc, projectOwner } = formData
     e.preventDefault();
-    console.log(formData)
-    console.log(selectedValue)
+
+    addProject({projectName, projectDesc, projectOwner, selectedValue})
   }
 
   const onChange = e => setformData({...formData, [e.target.name]:e.target.value})
@@ -135,6 +137,9 @@ const AdminProjects = ({projectsData,logedinuser,usersData}) => {
 
 <Modal isOpen={isModalOpen} onClose={closeModal}>
         <ModalHeader>add new project</ModalHeader>
+        <div className="mt-4 mb-4">
+        <DashboardAlert/>
+        </div>
         <ModalBody>
           this form is for adding a new project, just add the project name, desctription and then click at the project and complete the form
           next step : add the team members and the project taks
@@ -153,7 +158,7 @@ const AdminProjects = ({projectsData,logedinuser,usersData}) => {
 
           <Label className="mt-4">
             <span>Description</span>
-            <Textarea className="mt-1" onChange={(e) => onChange(e)} rows="3" name="projectDesc" placeholder="project desciption here" required />
+            <Textarea className="mt-1" onChange={(e) => onChange(e)} rows="18" name="projectDesc" placeholder="project desciption here" required />
           </Label>
 
 
@@ -186,5 +191,9 @@ const AdminProjects = ({projectsData,logedinuser,usersData}) => {
     )
 }
 
-export default AdminProjects
+AdminProjects.propTypes = {
+  addProject:PropTypes.func.isRequired,
+}
+
+export default connect(null,{addProject})(AdminProjects)
 

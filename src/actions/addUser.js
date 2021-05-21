@@ -18,6 +18,7 @@ export const LoadAllUsers = () => async dispatch => {
         });
 
     } catch (error) {
+        dispatch(dashboardAlert('Bad request please reflesh your page','red'))
         dispatch({
             type:USER_NOT_ADDED,
             payload:error.response.statusText
