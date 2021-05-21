@@ -1,27 +1,59 @@
-import React,{useState} from 'react'
-
+import React,{useState,useEffect} from 'react'
+import Select from 'react-select'
 // redux stuff
 
 
 import PageTitle from './Typography/PageTitle'
 import SectionTitle from './Typography/SectionTitle'
-import { Card, CardBody,Avatar, Button,Modal, ModalHeader, ModalBody, ModalFooter,Label, Input,Textarea,Select} from '@windmill/react-ui'
+import { Card, CardBody,Avatar, Button,Modal, ModalHeader, ModalBody, ModalFooter,Label, Input,Textarea} from '@windmill/react-ui'
 import ProjectCard from './Cards/InfoCard';
+import e from 'cors'
 
-const AdminProjects = ({projectsData,logedinuser}) => {
+const AdminProjects = ({projectsData,logedinuser,usersData}) => {
   
+  
+
+  const [usersOptions, setusersOptions] = useState([])
+  const [selectedValue, setSelectedValue] = useState([]);
   const {startedPorjects , notStartedProjects} = projectsData;
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [formData, setformData] = useState({
     projectName:'',
     projectDesc:'',
-    team:''
   })
+
+
+  useEffect(() => {
+    setusersOptions(usersData.map(u => {
+      return {
+        label:<div className="flex justify-between">
+          <img className="flex-shrink-0 h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"/>
+          <span className="text-gray-700">{u.email}</span>
+        </div>,
+        value:u._id
+      }
+    }))
+  }, [])
+
+  console.log(usersOptions);
+
+
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ]
+
+  const handleChange = (e) => {
+    setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
+  }
+
 
   const onSubmit = e => {
 
     e.preventDefault();
     console.log(formData)
+    console.log(selectedValue)
   }
 
   const onChange = e => setformData({...formData, [e.target.name]:e.target.value})
@@ -115,20 +147,16 @@ const AdminProjects = ({projectsData,logedinuser}) => {
           </Label>
 
           <Label className="mt-4">
+          <span>Team Member</span>
+          <Select className="mt-1 " onChange={handleChange} isMulti  options={usersOptions} />
+          </Label>
+
+          <Label className="mt-4">
             <span>Description</span>
             <Textarea className="mt-1" onChange={(e) => onChange(e)} rows="3" name="projectDesc" placeholder="project desciption here" required />
           </Label>
 
-          <Label className="mt-4">
-          <span>Team Member</span>
-            <Select className="mt-1" name='team' multiple>
-              <option value="v1">Option 1</option>
-              <option value="v2">Option 2</option>
-              <option value="v3">Option 3</option>
-              <option value="v4">Option 4</option>
-              <option value="v5">Option 5</option>  
-            </Select>
-          </Label>
+
 
           <ModalFooter>
 
