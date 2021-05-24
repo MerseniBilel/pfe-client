@@ -8,6 +8,8 @@ const Charts = lazy(() => import('../pages/Charts'))
 const Page404 = lazy(() => import('../pages/404'))
 const Blank = lazy(() => import('../pages/Blank'))
 const RedirectHandler = lazy(() => import('../pages/redirectHandler'))
+const ProjDesc = lazy(() => import('../pages/ProjDesc'))
+
 /**
  * ⚠ These are internal routes!
  * They will be rendered inside the app, using the default `containers/Layout`.
@@ -46,7 +48,12 @@ export const routes = [
   {
     path: '/redirecthandler',
     component:RedirectHandler
-  }
+  },
+  {
+    path: '/projects/:id',
+    component:ProjDesc
+  },
+  
 ]
 
 

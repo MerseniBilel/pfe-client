@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import Select from 'react-select'
-
+import {Link} from 'react-router-dom'
 // redux stuff
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
@@ -99,9 +99,11 @@ const AdminProjects = ({projectsData,logedinuser,usersData,addProject}) => {
                     {
                       startedPorjects.map((spr) => {
                         return(
+                          <Link to={`projects/${spr._id}`}>
                           <ProjectCard key={spr._id} title={spr.projectOwner.email} value={spr.projectName} border="true">
                             <Avatar  size="large" className="hidden mr-4 md:block" src={spr.projectOwner.avatar} alt="User image" />
-                          </ProjectCard>                                         
+                          </ProjectCard>
+                          </Link>                                   
                         )
                       })
                     }
@@ -124,10 +126,11 @@ const AdminProjects = ({projectsData,logedinuser,usersData,addProject}) => {
                                           <div className="grid  gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
                                           {notStartedProjects.map((pr) => {
                                             return(
+                                              <Link to={`projects/${pr._id}`}>
                                             <ProjectCard key={pr._id} title={pr.projectOwner.email} value={pr.projectName} border="true">
                                                 <Avatar  size="large" className="hidden mr-4 md:block" src={pr.projectOwner.avatar} alt="User image" />
                                             </ProjectCard>
-                                    
+                                            </Link>
                                          
                                             )
                                           })
