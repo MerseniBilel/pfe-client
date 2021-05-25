@@ -29,6 +29,7 @@ import { ReactComponent as OutlineLogoutIcon } from './outlineLogout.svg'
 import { ReactComponent as SettingIcon } from './setting.svg'
 import { ReactComponent as PasswordIcon } from './password.svg'
 import { ReactComponent as InfoIcon } from './info.svg'
+import { ReactComponent as CalendarIcon } from './calendar.svg'
 
 
 export {
@@ -62,5 +63,6 @@ export {
   OutlineLogoutIcon,
   SettingIcon,
   PasswordIcon,
-  InfoIcon
+  InfoIcon,
+  CalendarIcon
 }

@@ -1,4 +1,5 @@
 import { lazy } from 'react'
+import { createDispatchHook } from 'react-redux'
 
 // use lazy for better code splitting, a.k.a. load faster
 const Dashboard = lazy(() => import('../pages/Dashboard'))
@@ -9,6 +10,7 @@ const Page404 = lazy(() => import('../pages/404'))
 const Blank = lazy(() => import('../pages/Blank'))
 const RedirectHandler = lazy(() => import('../pages/redirectHandler'))
 const ProjDesc = lazy(() => import('../pages/ProjDesc'))
+const Cdr = lazy(() => import('../pages/Cdr'))
 
 /**
  * ⚠ These are internal routes!
@@ -53,6 +55,10 @@ export const routes = [
     path: '/projects/:id',
     component:ProjDesc
   },
+  {
+    path:'/cdr',
+    component:Cdr
+  }
   
 ]
 

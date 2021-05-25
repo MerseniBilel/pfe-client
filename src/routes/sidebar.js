@@ -40,6 +40,11 @@ export const projectownerroutes = [
     name: 'Users',
   },
   {
+    path: '/app/cdr',
+    icon: 'CalendarIcon',
+    name: 'CDR',
+  },
+  {
     path: '/app/setting',
     icon: 'SettingIcon',
     name: 'Setting',
@@ -53,9 +58,15 @@ export const teammemberroutes = [
     name: 'Projects',
   },
   {
+    path: '/app/cdr',
+    icon: 'CalendarIcon',
+    name: 'CDR',
+  },
+  {
     path: '/app/setting',
     icon: 'SettingIcon',
     name: 'Setting',
-  },
+  }
+
 ]
 
