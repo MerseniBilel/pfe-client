@@ -1,0 +1,25 @@
+i have to create a new collection called events
+what should i put in it ? :
+    - id
+    - title
+    - start 
+    - end
+    - userid
+
+when should i add an event ? :
+    when a project owner add a user
+    when a project owner add a project
+    when a project owner start a project
+    when a project owner  delete a user
+    when a project owner delete a project
+    when a user complete a task
+
+what should i fetch ? :
+    select * from events where userid: current login user (project owner or team member)
+
+admin ? :
+    admin should download the pdf file and download it every mounth
+
+
+
+
