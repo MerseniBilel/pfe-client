@@ -1,10 +1,49 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card, CardBody} from '@windmill/react-ui'
+import { Card, CardBody, Button} from '@windmill/react-ui'
 import PageTitle from '../components/Typography/PageTitle'
-
+import DragNDrop from '../components/DragNDrop';
 
 const ProjDesc = () => {
+    
+    const data = [
+        {
+            user:'69qsd65qsd95qsd',
+            tasks:[
+                { id:"1", teskTitle:"Title", deadline :"2021-05-29",content:"this is a content" },
+                { id:"2", teskTitle:"Title", deadline :"2021-05-31",content:"this is a content" },
+                { id:"3", teskTitle:"Title", deadline :"2021-06-07",content:"this is a content" },
+                { id:"3", teskTitle:"Title", deadline :"2021-06-12",content:"this is a content" }
+            ]
+        }
+    ]
+    const usertasks = [
+        {
+            user : '69cac6595cs659sc9',
+            tasks : [
+                { id:"1", teskTitle:"Title", deadline :"2021-05-29",content:"this is a content" },
+            ]
+        },
+        {
+            user : '69cac6595cs659sc9',
+            tasks : [
+                { id:"1", teskTitle:"Title", deadline :"2021-05-29",content:"this is a content" },
+            ]
+        },
+        {
+            user : '69cac6595cs659sc9',
+            tasks : [
+                { id:"1", teskTitle:"Title", deadline :"2021-05-29",content:"this is a content" },
+            ]
+        },
+        {
+            user : '69cac6595cs659sc9',
+            tasks : [
+                { id:"1", teskTitle:"Title", deadline :"2021-05-29",content:"this is a content" },
+            ]
+        }
+    ]
+
     return (
         <>
         <div className="flex items-center justify-between">
@@ -30,7 +69,11 @@ const ProjDesc = () => {
         </Card>
         </div>
 
+        <Button className="mt-4" >
+            add task
+        </Button>
 
+        <DragNDrop data={data} usersTasks={usertasks} />
         </>
     )
 }
