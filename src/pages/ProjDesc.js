@@ -5,41 +5,38 @@ import PageTitle from '../components/Typography/PageTitle'
 import DragNDrop from '../components/DragNDrop';
 
 const ProjDesc = () => {
-    
     const data = [
         {
-            user:'69qsd65qsd95qsd',
+            user:'thisistheProjectowner@gmail.com',
             tasks:[
                 { id:"1", teskTitle:"Title", deadline :"2021-05-29",content:"this is a content" },
                 { id:"2", teskTitle:"Title", deadline :"2021-05-31",content:"this is a content" },
-                { id:"3", teskTitle:"Title", deadline :"2021-06-07",content:"this is a content" },
+                { id:"4", teskTitle:"Title", deadline :"2021-06-07",content:"this is a content" },
                 { id:"3", teskTitle:"Title", deadline :"2021-06-12",content:"this is a content" }
             ]
-        }
-    ]
-    const usertasks = [
+        },
         {
-            user : '69cac6595cs659sc9',
+            user : 'user1@gmail.com',
             tasks : [
                 { id:"1", teskTitle:"Title", deadline :"2021-05-29",content:"this is a content" },
             ]
         },
         {
-            user : '69cac6595cs659sc9',
+            user : 'user2@gmail.com',
             tasks : [
-                { id:"1", teskTitle:"Title", deadline :"2021-05-29",content:"this is a content" },
+                { id:"21", teskTitle:"Title", deadline :"2021-05-29",content:"this is a content" },
             ]
         },
         {
-            user : '69cac6595cs659sc9',
+            user : 'user3@gmail.com',
             tasks : [
-                { id:"1", teskTitle:"Title", deadline :"2021-05-29",content:"this is a content" },
+                { id:"12", teskTitle:"Title", deadline :"2021-05-29",content:"this is a content" },
             ]
         },
         {
-            user : '69cac6595cs659sc9',
+            user : 'user4@gmail.com',
             tasks : [
-                { id:"1", teskTitle:"Title", deadline :"2021-05-29",content:"this is a content" },
+                { id:"14", teskTitle:"Title", deadline :"2021-05-29",content:"this is a content" },
             ]
         }
     ]
@@ -73,7 +70,7 @@ const ProjDesc = () => {
             add task
         </Button>
 
-        <DragNDrop data={data} usersTasks={usertasks} />
+        <DragNDrop data={data} />
         </>
     )
 }

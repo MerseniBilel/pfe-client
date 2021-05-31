@@ -56,7 +56,7 @@ export const routes = [
     component:ProjDesc
   },
   {
-    path:'/cdr',
+    path:'/cra',
     component:Cdr
   }
   
