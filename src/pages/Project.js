@@ -27,7 +27,7 @@ Cards.propTypes = {
   projectsData : PropTypes.object,
   isLoading:PropTypes.bool.isRequired,
   logedInUser:PropTypes.object,
-  allUsers:PropTypes.object,
+  allUsers:PropTypes.array,
   
 }
 

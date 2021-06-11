@@ -26,16 +26,25 @@ const AdminProjects = ({projectsData,logedinuser,usersData,addProject}) => {
     projectDesc:'',
     projectOwner:logedinuser._id
   })
+  const [file, setfile] = useState('');
+  const [filename, setfilename] = useState('');
+  
+  const saveFile = (e) => {
+      setfile(e.target.files[0]);
+      setfilename(e.target.files[0].name);
+  };
+
 
 
   useEffect(() => {
+    console.log(usersData);
     /* state.filter(alert => alert.id !== payload); */
     const filtreduser = usersData.filter(u => u.role == 2);
     setusersOptions(filtreduser.map(u => {
         return {
           label:<div className="flex justify-between">
             <img className="flex-shrink-0 h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"/>
-            <span className="text-gray-700">{u.email + " ==> " +u._id}</span>
+            <span className="text-gray-700">{u.email}</span>
           </div>,
           value:u._id
         }
@@ -54,8 +63,15 @@ const AdminProjects = ({projectsData,logedinuser,usersData,addProject}) => {
 
     const { projectName, projectDesc, projectOwner } = formData
     e.preventDefault();
+    const projectData = new FormData();
+    projectData.append('file', file);
+    projectData.append('projectName', projectName);
+    projectData.append('projectDesc', projectDesc);
+    projectData.append('projectOwner', projectOwner);
+    projectData.append('selectedValue', selectedValue);
 
-    addProject({projectName, projectDesc, projectOwner, selectedValue})
+    addProject(projectData);
+
   }
 
   const onChange = e => setformData({...formData, [e.target.name]:e.target.value})
@@ -90,7 +106,7 @@ const AdminProjects = ({projectsData,logedinuser,usersData,addProject}) => {
         {
           startedPorjects.length == 0 ? <Card colored className="text-white bg-purple-600">
           <CardBody>
-            <p className="mb-4 font-semibold">Hey admin 👋</p>
+            <p className="mb-4 font-semibold">Hey 👋</p>
             <p>
               Sorry for that 😞, but no Started projects yet, the check the not started project list below, have a good day  
             </p>
@@ -116,7 +132,7 @@ const AdminProjects = ({projectsData,logedinuser,usersData,addProject}) => {
         {
           notStartedProjects.length == 0 ? <Card colored className="text-white bg-purple-600">
                                               <CardBody>
-                                                <p className="mb-4 font-semibold">Hey admin 👋</p>
+                                                <p className="mb-4 font-semibold">Hey 👋</p>
                                                 <p>
                                                   No pending project here, i think all project are on progress or we have no project for today, have a nice day
                                                 </p>
@@ -126,7 +142,7 @@ const AdminProjects = ({projectsData,logedinuser,usersData,addProject}) => {
                                           <div className="grid  gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
                                           {notStartedProjects.map((pr) => {
                                             return(
-                                              <Link to={`projects/${pr._id}`}>
+                                              <Link key={pr._id} to={`projects/${pr._id}`}>
                                             <ProjectCard key={pr._id} title={pr.projectOwner.email} value={pr.projectName} border="true">
                                                 <Avatar  size="large" className="hidden mr-4 md:block" src={pr.projectOwner.avatar} alt="User image" />
                                             </ProjectCard>
@@ -161,8 +177,41 @@ const AdminProjects = ({projectsData,logedinuser,usersData,addProject}) => {
 
           <Label className="mt-4">
             <span>Description</span>
-            <Textarea className="mt-1" onChange={(e) => onChange(e)} rows="18" name="projectDesc" placeholder="project desciption here" required />
+            <Textarea className="mt-1" onChange={(e) => onChange(e)} rows="8" name="projectDesc" placeholder="project desciption here" required />
           </Label>
+
+          <div>
+            <Label className="mt-4">Peroject file</Label>
+                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                    <div className="space-y-1 text-center">
+                        <svg
+                          className="mx-auto h-12 w-12 text-gray-400"
+                          stroke="currentColor"
+                          fill="none"
+                          viewBox="0 0 48 48"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                            strokeWidth={2}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                        <div className="flex text-sm text-gray-600">
+                          <label
+                            htmlFor="file-upload"
+                            className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                          >
+                            <span>Upload a file</span>
+                            <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={saveFile}/>
+                          </label>
+                          <p className="pl-1">or drag and drop</p>
+                        </div>
+                        <p className="text-xs text-gray-500">PDF up to 25MB</p>
+                    </div>
+                </div>
+        </div>
 
 
 

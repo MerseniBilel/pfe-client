@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
-
-
-
 import InfoCard from './Cards/InfoCard'
 import ChartCard from './Chart/ChartCard'
 import { Doughnut, Line } from 'react-chartjs-2'

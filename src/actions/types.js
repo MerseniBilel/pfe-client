@@ -30,6 +30,17 @@ export const REMOVE_DASHBOARD_ALERT = 'REMOVE_DASHBOARD_ALERT'
 // Projects 
 export const PROJECTS_LOADED = 'PROJECTS_LOADED'
 export const PROJECTS_NOT_LOADED = 'PROJECTS_NOT_LOADED'
+export const CURRENTPROJECT_LOADED = 'CURRENTPROJECT_LOADED';
+export const CURRENTPROJECT_ERROR = 'CURRENTPROJECT_ERROR';
+
+
+//tasks 
+export const TASKS_LOADED = 'TASKS_LOADED';
+export const TASKS_ERROR = 'TASKS_ERROR';
+export const TASKS_ADDED = 'TASKS_ADDED';
+export const TASKS_UPDATED = 'TASKS_UPDATED';
+export const TASKS_DELETED = 'TASKS_DELETED';
+
 
 
 //get all users action

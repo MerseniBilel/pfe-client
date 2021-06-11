@@ -5,6 +5,8 @@ import adminHomePage from './adminHomePage'
 import AddUser from './addUser';
 import dashboardAlert from './dashboardAlert';
 import project from './project'
+import currentProject from './currentProject'
+import tasks from './tasks'
 
 export default combineReducers({
     alert,
@@ -12,5 +14,7 @@ export default combineReducers({
     adminHomePage,
     AddUser,
     dashboardAlert,
-    project
+    project,
+    currentProject,
+    tasks
 })

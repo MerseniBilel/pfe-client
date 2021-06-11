@@ -3,7 +3,7 @@
 import {PROJECTS_LOADED,PROJECTS_NOT_LOADED} from '../actions/types'
 
 const initialState = {
-    data : null,
+    data : {},
     loading: true,
     error:null
 }

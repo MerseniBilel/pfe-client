@@ -1,7 +1,7 @@
 import { USER_ADDED,USER_NOT_ADDED } from  '../actions/types'
 
 const initialState = {
-    user:null,
+    user:[],
     loading:true,
     error:null
 }

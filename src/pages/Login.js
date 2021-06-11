@@ -8,8 +8,6 @@ import PropTypes from 'prop-types'
 
 import AlertComponent from '../components/AlertComponent';
 
-import redirectHandler from './redirectHandler';
-
 import ImageLight from '../assets/img/login-office.jpeg';
 import ImageDark from '../assets/img/login-office-dark.jpeg';
 import { Label, Input, Button,HelperText } from '@windmill/react-ui';

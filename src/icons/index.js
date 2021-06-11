@@ -30,6 +30,9 @@ import { ReactComponent as SettingIcon } from './setting.svg'
 import { ReactComponent as PasswordIcon } from './password.svg'
 import { ReactComponent as InfoIcon } from './info.svg'
 import { ReactComponent as CalendarIcon } from './calendar.svg'
+import { ReactComponent as PdfIcon } from './filepdf.svg'
+import { ReactComponent as Todo } from './todo.svg'
+import { ReactComponent as Done } from './done.svg'
 
 
 export {
@@ -64,5 +67,8 @@ export {
   SettingIcon,
   PasswordIcon,
   InfoIcon,
-  CalendarIcon
+  CalendarIcon,
+  PdfIcon,
+  Todo,
+  Done
 }

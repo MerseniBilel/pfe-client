@@ -4,6 +4,25 @@ import setAuthToken from '../utils/setAuthToken';
 import {dashboardAlert} from './dashboardAlert';
 
 
+//update user
+export const updateUser = (datafile) => async dispatch => {
+    if(localStorage.token){
+        setAuthToken(localStorage.token);
+    }
+    const config ={
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    }
+
+    try {
+        const res = await axios.put('/api/auth',datafile, config);
+    } catch (error) {
+        dispatch(dashboardAlert('there is an error','red'))
+    }
+}
+
+
 //laod all user
 export const LoadAllUsers = () => async dispatch => {
     if(localStorage.token){

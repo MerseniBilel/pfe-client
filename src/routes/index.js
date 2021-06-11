@@ -11,6 +11,7 @@ const Blank = lazy(() => import('../pages/Blank'))
 const RedirectHandler = lazy(() => import('../pages/redirectHandler'))
 const ProjDesc = lazy(() => import('../pages/ProjDesc'))
 const Cdr = lazy(() => import('../pages/Cdr'))
+const Settings = lazy(() => import('../pages/settings'))
 
 /**
  * ⚠ These are internal routes!
@@ -58,7 +59,11 @@ export const routes = [
   {
     path:'/cra',
     component:Cdr
-  }
+  },
+  {
+    path: '/setting',
+    component: Settings,
+  },
   
 ]
 

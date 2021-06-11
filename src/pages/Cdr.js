@@ -8,7 +8,20 @@ import interactionPlugin from '@fullcalendar/interaction'
 const Cdr = () => {
     
     const [wikendVisible, setwikendVisible] = useState(true)
-    const [events, setevents] = useState([])
+    const [events, setevents] = useState([
+            {
+            id: '1',
+            title: 'All-day event',
+            start: '2021-06-11',
+            end : '2021-06-13'
+          },
+          {
+            id: '2',
+            title: 'Timed event',
+            start: '2021-06-10',
+            end: '2021-06-13'
+          }
+    ])
     
 
     function renderEventContent(eventInfo) {
