@@ -58,9 +58,9 @@ export const teammemberroutes = [
     name: 'Projects',
   },
   {
-    path: '/app/cdr',
+    path: '/app/cra',
     icon: 'CalendarIcon',
-    name: 'CDR',
+    name: 'CRA',
   },
   {
     path: '/app/setting',
