@@ -33,6 +33,9 @@ import { ReactComponent as CalendarIcon } from './calendar.svg'
 import { ReactComponent as PdfIcon } from './filepdf.svg'
 import { ReactComponent as Todo } from './todo.svg'
 import { ReactComponent as Done } from './done.svg'
+import { ReactComponent as Low } from './low.svg'
+import { ReactComponent as Meduim } from './meduim.svg'
+import { ReactComponent as Hight } from './hight.svg'
 
 
 export {
@@ -70,5 +73,8 @@ export {
   CalendarIcon,
   PdfIcon,
   Todo,
-  Done
+  Done,
+  Low,
+  Meduim,
+  Hight
 }

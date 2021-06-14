@@ -92,3 +92,13 @@ export const deleteProject = ({projectid}) => async dispatch => {
     }
 }
 
+
+export const addtasktoevent = ({taskid, projectid}) => async dispatch => {
+    try{
+        console.log(taskid)
+        console.log(projectid)
+    }catch(error){
+        console.log(error);
+    }
+}
+
