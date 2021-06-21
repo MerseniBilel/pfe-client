@@ -1,9 +1,25 @@
 import React,{useState, useEffect} from 'react'
 import { Card, CardBody, Input} from '@windmill/react-ui'
+import PageTitle from '../components/Typography/PageTitle'
+import { Link, Redirect } from 'react-router-dom';
+import {PdfIcon} from '../icons';
+import InfoCard from '../components/Cards/InfoCard';
+import RoundIcon from './RoundIcon';  
+import ChartCard from '../components/Chart/ChartCard'
+import {Bar } from 'react-chartjs-2'
+import ChartLegend from '../components/Chart/ChartLegend'
 import { Low, Meduim, Hight } from '../icons'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
+<<<<<<< HEAD
 import { addtasktoevent, initevnet } from '../actions/project' 
+=======
+import { addtasktoevent } from '../actions/project' 
+import {
+    barOptions,
+    barLegends,
+  } from '../utils/demo/chartsData'
+>>>>>>> 030992fc9a3fd32246052e9a813dbe6ed6465cd7
 
 const TodoComponent = ({ currentuser ,myproject, addtasktoevent, initevnet}) => {
     const [projectStarted, setprojectStarted] = useState(false)
@@ -14,21 +30,65 @@ const TodoComponent = ({ currentuser ,myproject, addtasktoevent, initevnet}) => 
         addtasktoevent({taskid,projectid});
     }
 
+<<<<<<< HEAD
     useEffect(() => {
         initevnet(myproject,currentuser);
     }, [])
+=======
+    const openInNewTab = (url) => {
+        const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+        if (newWindow) newWindow.opener = null
+    }
+>>>>>>> 030992fc9a3fd32246052e9a813dbe6ed6465cd7
 
     return (
         <>
+            <div className="flex items-center justify-between">
+                <div className="mt-2"> 
+                <img className="rounded-full h-32 w-32" src={myproject.projectOwner.avatar} alt="User image" /> 
+                <div className="ml-2">
+                </div>
+                
+                </div>
+                <div className="mt-2">
+                <PageTitle>{myproject.projectName}</PageTitle>
+                
+
+                </div>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 ">
+          <Card colored className="text-white bg-purple-600 col-span-2">
+            <CardBody>
+              <p className="mb-4 font-semibold">Project Description</p>
+              <p>
+              {myproject.projectDesc}
+              </p>
+            </CardBody>
+          </Card>
+
+          <Link to='' onClick={() => openInNewTab(myproject.projectFile)}>
+            <InfoCard 
+              title='project pdf file desciption'
+              value='Click Here to download the pdf file'
+              >
+              <RoundIcon
+              icon={PdfIcon}
+              iconColorClass="text-orange-500 dark:text-orange-100"
+              bgColorClass="bg-orange-100 dark:bg-orange-500"
+              className="mr-4"
+              />
+
+            </InfoCard>
+          </Link>
+
+       
+        </div>
+
             <div className=" mt-4 flex">
                 <div className="flex-auto">
                     <Card className="mb-8 shadow-md">
                         <CardBody >
-                            <p className="text-xl flex justify-center text-center font-bold text-gray-600 dark:text-gray-400">
-                            <img className="rounded-full mr-4 h-8 w-8" src={myproject.projectOwner.avatar} alt="User image" />
-                            {myproject.projectName}
-                            </p>
-
                             {myproject.tasks.map(task => {
                                 if(task.teamMember == currentuser._id){
                                     return (
@@ -60,6 +120,11 @@ const TodoComponent = ({ currentuser ,myproject, addtasktoevent, initevnet}) => 
                     </Card>
                 </div>
             </div>
+
+            <ChartCard title="productivity">
+                <Bar {...barOptions} />
+                <ChartLegend legends={barLegends} />
+            </ChartCard>
         </>
     )
 }

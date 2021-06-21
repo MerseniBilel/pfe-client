@@ -10,8 +10,7 @@ export const lineLegends = [
 ]
 
 export const barLegends = [
-  { title: 'Shoes', color: 'bg-teal-600' },
-  { title: 'Bags', color: 'bg-purple-600' },
+  { title: 'productivity', color: 'bg-purple-600' },
 ]
 
 export const doughnutOptions = {
@@ -103,14 +102,7 @@ export const barOptions = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
       {
-        label: 'Shoes',
-        backgroundColor: '#0694a2',
-        // borderColor: window.chartColors.red,
-        borderWidth: 1,
-        data: [-3, 14, 52, 74, 33, 90, 70],
-      },
-      {
-        label: 'Bags',
+        label: 'productivity',
         backgroundColor: '#7e3af2',
         // borderColor: window.chartColors.blue,
         borderWidth: 1,
