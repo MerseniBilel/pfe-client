@@ -31,7 +31,7 @@ import {
     ModalFooter
   } from '@windmill/react-ui'
 
-const AdminUsers = ({UserList, addUser}) => {
+const AdminUsers = ({UserList, addUser,logedinuser}) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     
@@ -55,18 +55,19 @@ const AdminUsers = ({UserList, addUser}) => {
       password:'',
       phone_number:'',
       role:'',
-      msg:''
+      msg:'',
+      logedinuser : logedinuser._id
     })
 
-    const {name,lastname, email, password, phone_number, role, msg} = formData
+    
 
 
     const onChange = e => setformData({...formData, [e.target.name]:e.target.value})
 
     const onSubmit = e => {
-
+      const {name,lastname, email, password, phone_number, role, msg, logedinuser} = formData
       e.preventDefault();
-      addUser({ name,lastname, email, password, phone_number, role, msg })
+      addUser({ name,lastname, email, password, phone_number, role, msg,logedinuser })
       e.target.reset();
     }
 

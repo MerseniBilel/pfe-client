@@ -46,12 +46,17 @@ export const LoadAllUsers = () => async dispatch => {
 }
 
 
-export const addUser = ({ name,lastname, email,password,phone_number,role,msg }) => async dispatch =>{
+export const addUser = ({ name,lastname, email,password,phone_number,role,msg,logedinuser }) => async dispatch =>{
     const config ={
         headers: {
             'content-type': 'application/json'
         }
     }
+
+    var taskdescription = `${new Date(Date.now()).toLocaleTimeString()} user ${email} added`;
+    var theuser = logedinuser;
+    const body2 = JSON.stringify({ taskdescription , theuser});
+    await axios.post('/api/event',body2,config);
 
     const body = JSON.stringify({ name,lastname, email,password,phone_number,role,msg});
     

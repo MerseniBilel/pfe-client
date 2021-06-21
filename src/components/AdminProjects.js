@@ -70,7 +70,7 @@ const AdminProjects = ({projectsData,logedinuser,usersData,addProject}) => {
     projectData.append('projectOwner', projectOwner);
     projectData.append('selectedValue', selectedValue);
 
-    addProject(projectData, projectOwner);
+    addProject(projectData, projectOwner, projectName);
 
   }
 

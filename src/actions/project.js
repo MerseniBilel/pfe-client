@@ -29,7 +29,7 @@ export const LoadProjects = () => async dispatch => {
 
 
 // add project
-export const addProject = (projectData, projectOwner) => async dispatch => {
+export const addProject = (projectData, projectOwner, projectName) => async dispatch => {
     //set auth token if exist if not so request will not be valid
     if(localStorage.token){
         setAuthToken(localStorage.token);
@@ -48,7 +48,7 @@ export const addProject = (projectData, projectOwner) => async dispatch => {
     }
     
     try {
-        var taskdescription = 'project added';
+        var taskdescription = `${new Date(Date.now()).toLocaleTimeString()} project ${projectName} added`;
         var theuser = projectOwner;
         const body = JSON.stringify({ taskdescription , theuser});
         await axios.post('/api/event',body,config2);
@@ -61,8 +61,8 @@ export const addProject = (projectData, projectOwner) => async dispatch => {
             
 
         }else{
-            console.log('there is and error');
-            //dispatch(dashboardAlert('Bad request check the fields - reload the poge or cal the developer 😂 ','red'))
+            //console.log('there is and error');
+            dispatch(dashboardAlert('project already exists','red'))
         }
        
     } catch (error) {
@@ -104,7 +104,7 @@ export const deleteProject = ({projectid, projectownerid}) => async dispatch => 
     }
     try{
 
-        var taskdescription = 'project deleted';
+        var taskdescription = `${new Date(Date.now()).toLocaleTimeString()} project with id ${projectid} deleted`;
         var theuser = projectownerid;
         const body = JSON.stringify({ taskdescription , theuser});
         await axios.post('/api/event',body,config2);
@@ -118,12 +118,24 @@ export const deleteProject = ({projectid, projectownerid}) => async dispatch => 
 
 //add finish task to event
 export const addtasktoevent = ({taskid, projectid}) => async dispatch => {
+    const config ={
+        headers: {
+            'content-type': 'application/json'
+        }
+    }
     try{
-        console.log(taskid)
-        //send put request to project to change task complete to true
+        //update task to conpleted when check box
+        const res = await axios.put(`/api/projs/task/${taskid}`);
 
-        console.log(projectid)
-        //send post request to task to add the finish date
+        // get the task id
+        const task = await axios.get(`/api/tasks/task/${projectid}`)
+        const result = task.data[0].tasks.filter(tt => tt._id == taskid);
+        
+        var taskdescription = result[0].description
+        var finishdate = new Date(Date.now()).toLocaleDateString();
+        const body = JSON.stringify({ taskdescription , finishdate});
+        await axios.post('/api/event/update',body,config);
+        dispatch(getProjectById(projectid))
     }catch(error){
         console.log(error);
     }
@@ -159,3 +171,24 @@ export const initevnet = (myproject,currentuser) => async dispatch => {
 
 
 
+//delete project
+export const updateProject = ({projectid, projectownerid}) => async dispatch => {
+    const config2 ={
+        headers: {
+            'content-type': 'application/json'
+        }
+    }
+    try{
+
+        var taskdescription = `${new Date(Date.now()).toLocaleTimeString()} project started ${projectid}`;
+        var theuser = projectownerid;
+        const body = JSON.stringify({ taskdescription , theuser});
+        await axios.post('/api/event',body,config2);
+
+        const res = await axios.put(`/api/projs/${projectid}`);
+        dispatch(dashboardAlert('project Started','green'))
+        dispatch(LoadProjects())
+    }catch(error){
+        console.log(error);
+    }
+}

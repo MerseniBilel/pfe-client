@@ -11,35 +11,31 @@ import ChartLegend from '../components/Chart/ChartLegend'
 import { Low, Meduim, Hight } from '../icons'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
-<<<<<<< HEAD
+
 import { addtasktoevent, initevnet } from '../actions/project' 
-=======
-import { addtasktoevent } from '../actions/project' 
+
 import {
     barOptions,
     barLegends,
   } from '../utils/demo/chartsData'
->>>>>>> 030992fc9a3fd32246052e9a813dbe6ed6465cd7
+
 
 const TodoComponent = ({ currentuser ,myproject, addtasktoevent, initevnet}) => {
     const [projectStarted, setprojectStarted] = useState(false)
 
+    const openInNewTab = (url) => {
+        const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+        if (newWindow) newWindow.opener = null
+    }
 
     function handlecheckbox (taskid) {
         const projectid = myproject._id
         addtasktoevent({taskid,projectid});
     }
 
-<<<<<<< HEAD
     useEffect(() => {
         initevnet(myproject,currentuser);
     }, [])
-=======
-    const openInNewTab = (url) => {
-        const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
-        if (newWindow) newWindow.opener = null
-    }
->>>>>>> 030992fc9a3fd32246052e9a813dbe6ed6465cd7
 
     return (
         <>

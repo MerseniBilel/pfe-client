@@ -7,7 +7,7 @@ import {LoadProjects} from '../actions/project';
 import  { LoadAllUsers } from '../actions/addUser';
 import AdminProjects from '../components/AdminProjects';
 
-function Cards({LoadProjects,LoadAllUsers,allUsers, projectsData,isLoading,logedInUser }) {
+function Projects({LoadProjects,LoadAllUsers,allUsers, projectsData,isLoading,logedInUser }) {
   useEffect(() => {
     LoadProjects();
     LoadAllUsers();
@@ -21,7 +21,7 @@ function Cards({LoadProjects,LoadAllUsers,allUsers, projectsData,isLoading,loged
   )
 }
 
-Cards.propTypes = {
+Projects.propTypes = {
   LoadProjects:PropTypes.func.isRequired,
   LoadAllUsers : PropTypes.func.isRequired,
   projectsData : PropTypes.object,
@@ -40,7 +40,7 @@ const mapStateToProps = state => ({
   
 })
 
-export default connect(mapStateToProps,{LoadProjects,LoadAllUsers})(Cards)
+export default connect(mapStateToProps,{LoadProjects,LoadAllUsers})(Projects)
 /*
 
 const mapStateToProps = state => ({

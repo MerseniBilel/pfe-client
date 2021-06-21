@@ -9,15 +9,16 @@ import { Link, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { addtask } from '../actions/tasks';
-import { deleteProject } from '../actions/project';
+import { deleteProject,updateProject } from '../actions/project';
 import DashboardAlert from './DashboardAlert'
-import { TrashIcon } from '../icons';
+import { TrashIcon, SettingIcon } from '../icons';
 
 
-const DragDropComponents = ({data, myproject,addtask,deleteProject}) => {
+const DragDropComponents = ({data, myproject,addtask,deleteProject, updateProject}) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [is2ModalOpen, setIs2ModalOpen] = useState(false)
+  const [is3ModalOpen, setIs3ModalOpen] = useState(false)
   const [formData, setformData] = useState({
     task:'',
     description:'',
@@ -31,6 +32,7 @@ const DragDropComponents = ({data, myproject,addtask,deleteProject}) => {
   const [todelete, settodelete] = useState({
     projectid: myproject._id
   })
+
 
   const onChange = e => setformData({...formData, [e.target.name]:e.target.value})
 
@@ -54,12 +56,21 @@ const DragDropComponents = ({data, myproject,addtask,deleteProject}) => {
     setdeleted(true)
    
   }
+  const on3Submit = e => {
+    e.preventDefault();
+    const { projectid } = todelete
+    const projectownerid = myproject.projectOwner._id
+    updateProject({projectid,projectownerid})   
+  }
 
   function openModal() {
     setIsModalOpen(true)
   }
   function open2Modal() {
     setIs2ModalOpen(true)
+  }
+  function open3Modal() {
+    setIs3ModalOpen(true)
   }
 
   function closeModal() {
@@ -68,6 +79,10 @@ const DragDropComponents = ({data, myproject,addtask,deleteProject}) => {
   }
   function close2Modal() {
     setIs2ModalOpen(false)
+    window.location.reload(false);
+  }
+  function close3Modal() {
+    setIs3ModalOpen(false)
     window.location.reload(false);
   }
     const openInNewTab = (url) => {
@@ -162,14 +177,38 @@ const DragDropComponents = ({data, myproject,addtask,deleteProject}) => {
           
         </ModalBody>
       </Modal>
+      <Modal isOpen={is3ModalOpen} onClose={close3Modal}>
+        <ModalHeader>Start this project </ModalHeader>
+        <ModalBody>
+        <DashboardAlert/>
+          <form onSubmit={e => on3Submit(e)}>
+          <ModalFooter>
+            <Button type='submit' className="w-full sm:w-auto">StartProject</Button>
+          </ModalFooter>
+          </form>
+          
+        </ModalBody>
+      </Modal>
 
         <div className="flex items-center justify-between">
             <div className="mt-2"> 
             <img className="rounded-full h-32 w-32" src={myproject.projectOwner.avatar} alt="User image" /> 
-            <div className="ml-2">
-              <Button  iconLeft={TrashIcon} onClick={open2Modal} className="mt-4" >
+            <div className="ml-2 flex">
+              <div>
+              <Button iconLeft={TrashIcon} onClick={open2Modal} className="mt-4" >
                      delete 
               </Button>
+              </div>
+              <div className="ml-2">
+                {
+                  myproject.started ? null :  
+                  <Button layout="outline" iconLeft={SettingIcon} onClick={open3Modal} className="mt-4" >
+                    StartProject
+                  </Button>
+                }
+              </div>
+
+
             </div>
             
             </div>
@@ -221,6 +260,7 @@ const DragDropComponents = ({data, myproject,addtask,deleteProject}) => {
 DragDropComponents.propTypes = {
   addtask:PropTypes.func.isRequired,
   deleteProject:PropTypes.func.isRequired,
+  updateProject : PropTypes.func.isRequired,
 }
 
-export default connect(null,{addtask,deleteProject})(DragDropComponents)
+export default connect(null,{addtask,deleteProject, updateProject})(DragDropComponents)
