@@ -113,7 +113,10 @@ const SideBar = ({userRole}) => {
                     )}
                   </ul>
                   <div className="px-6 my-6">
-                  </div>
+                    <Button>
+                      Generate Log
+                    </Button>
+                </div>
                 </div>
               );
         

@@ -53,21 +53,12 @@ function AdminDashboard(props) {
       <PageTitle>Dashboard</PageTitle>
       
       {/* <!-- Cards --> */}
-      <div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-3">
         <InfoCard title="Total Users" value={props.HomeData.usersNumber}>
           <RoundIcon
             icon={PeopleIcon}
             iconColorClass="text-orange-500 dark:text-orange-100"
             bgColorClass="bg-orange-100 dark:bg-orange-500"
-            className="mr-4"
-          />
-        </InfoCard>
-
-        <InfoCard title="CSI balance" value="$ 46,760.89">
-          <RoundIcon
-            icon={MoneyIcon}
-            iconColorClass="text-green-500 dark:text-green-100"
-            bgColorClass="bg-green-100 dark:bg-green-500"
             className="mr-4"
           />
         </InfoCard>
@@ -138,12 +129,7 @@ function AdminDashboard(props) {
       </TableContainer>
 
       <PageTitle>Our Trafic</PageTitle>
-      <div className="grid gap-6 mb-8 md:grid-cols-2">
-        <ChartCard title="Revenue">
-          <Doughnut {...doughnutOptions} />
-          <ChartLegend legends={doughnutLegends} />
-        </ChartCard>
-
+      <div className="mb-8 md:grid-cols-2">
         <ChartCard title="Traffic">
           <Line {...lineOptions} />
           <ChartLegend legends={lineLegends} />

@@ -1,17 +1,22 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import { Card, CardBody, Input} from '@windmill/react-ui'
 import { Low, Meduim, Hight } from '../icons'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
-import { addtasktoevent } from '../actions/project' 
+import { addtasktoevent, initevnet } from '../actions/project' 
 
-const TodoComponent = ({ currentuser ,myproject, addtasktoevent}) => {
+const TodoComponent = ({ currentuser ,myproject, addtasktoevent, initevnet}) => {
     const [projectStarted, setprojectStarted] = useState(false)
+
 
     function handlecheckbox (taskid) {
         const projectid = myproject._id
         addtasktoevent({taskid,projectid});
     }
+
+    useEffect(() => {
+        initevnet(myproject,currentuser);
+    }, [])
 
     return (
         <>
@@ -61,6 +66,7 @@ const TodoComponent = ({ currentuser ,myproject, addtasktoevent}) => {
 
 TodoComponent.propTypes = {
     addtasktoevent : PropTypes.func.isRequired,
+    initevnet :PropTypes.func.isRequired,
 }
 
-export default connect(null,{addtasktoevent})(TodoComponent)
+export default connect(null,{addtasktoevent,initevnet})(TodoComponent)

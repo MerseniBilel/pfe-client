@@ -29,7 +29,7 @@ export const LoadProjects = () => async dispatch => {
 
 
 // add project
-export const addProject = (projectData) => async dispatch => {
+export const addProject = (projectData, projectOwner) => async dispatch => {
     //set auth token if exist if not so request will not be valid
     if(localStorage.token){
         setAuthToken(localStorage.token);
@@ -41,12 +41,25 @@ export const addProject = (projectData) => async dispatch => {
             'Content-Type': 'multipart/form-data'
         }
     }
+    const config2 ={
+        headers: {
+            'content-type': 'application/json'
+        }
+    }
     
     try {
+        var taskdescription = 'project added';
+        var theuser = projectOwner;
+        const body = JSON.stringify({ taskdescription , theuser});
+        await axios.post('/api/event',body,config2);
+
         const res = await axios.post('/api/projs',projectData,config);
         if(res){
             dispatch(dashboardAlert('project Added Successfully','green'))
             dispatch(LoadProjects())
+
+            
+
         }else{
             console.log('there is and error');
             //dispatch(dashboardAlert('Bad request check the fields - reload the poge or cal the developer 😂 ','red'))
@@ -83,8 +96,19 @@ export const getProjectById = (projectID) => async dispatch => {
 
 
 //delete project
-export const deleteProject = ({projectid}) => async dispatch => {
+export const deleteProject = ({projectid, projectownerid}) => async dispatch => {
+    const config2 ={
+        headers: {
+            'content-type': 'application/json'
+        }
+    }
     try{
+
+        var taskdescription = 'project deleted';
+        var theuser = projectownerid;
+        const body = JSON.stringify({ taskdescription , theuser});
+        await axios.post('/api/event',body,config2);
+
         const res = await axios.delete(`/api/projs/${projectid}`);
         dispatch(LoadProjects())
     }catch(error){
@@ -92,13 +116,46 @@ export const deleteProject = ({projectid}) => async dispatch => {
     }
 }
 
-
+//add finish task to event
 export const addtasktoevent = ({taskid, projectid}) => async dispatch => {
     try{
         console.log(taskid)
+        //send put request to project to change task complete to true
+
         console.log(projectid)
+        //send post request to task to add the finish date
     }catch(error){
         console.log(error);
     }
 }
+
+
+//init event 
+export const initevnet = (myproject,currentuser) => async dispatch => {
+    if(localStorage.token){
+        setAuthToken(localStorage.token);
+    }
+    const config ={
+        headers: {
+            'content-type': 'application/json'
+        }
+    }
+    try{
+        const mytasks = myproject.tasks.filter(tt => tt.teamMember == currentuser._id);
+        await Promise.all(mytasks.map(async ttt => {
+            //const {taskdescription , theuser} = req.body
+            //const body = JSON.stringify({ name,lastname, email,password,phone_number,role,msg});
+            var taskdescription = ttt.description
+            var theuser = currentuser._id
+            const  body = JSON.stringify({ taskdescription , theuser});
+            await axios.post('/api/event', body,config);
+
+        }));
+
+    }catch(error){
+        console.log(error);
+    }
+}
+
+
 
