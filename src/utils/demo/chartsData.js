@@ -1,12 +1,11 @@
 export const doughnutLegends = [
-  { title: '1', color: 'bg-blue-500' },
-  { title: '2', color: 'bg-teal-600' },
-  { title: '3', color: 'bg-purple-600' },
+  { title: 'Finished tasks', color: 'bg-blue-500' },
+  { title: 'Pending tasks', color: 'bg-teal-600' },
 ]
 
 export const lineLegends = [
-  { title: 'Added users', color: 'bg-teal-600' },
-  { title: 'completed projects', color: 'bg-purple-600' },
+  { title: 'Finished tasks', color: 'bg-teal-600' },
+  { title: 'Pending tasks', color: 'bg-purple-600' },
 ]
 
 export const barLegends = [
@@ -17,16 +16,12 @@ export const doughnutOptions = {
   data: {
     datasets: [
       {
-        data: [33, 33, 33],
-        /**
-         * These colors come from Tailwind CSS palette
-         * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
-         */
-        backgroundColor: ['#0694a2', '#1c64f2', '#7e3af2'],
-        label: 'Dataset 1',
+        data: [1, 0],
+        backgroundColor: ['#0694a2', '#1c64f2'],
+        label: 'productivity',
       },
     ],
-    labels: ['1', '2', '3'],
+    labels: ['Finished tasks', 'Pending tasks'],
   },
   options: {
     responsive: true,

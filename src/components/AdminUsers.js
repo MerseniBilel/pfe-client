@@ -152,14 +152,18 @@ const AdminUsers = ({UserList, addUser,logedinuser}) => {
         <div className="mt-4">
           <Label>Account Type</Label>
           <div className="mt-2">
+            {logedinuser.role == 0 ? 
             <Label radio>
-              <Input type="radio" value="0" name="role" onChange={(e) => onChange(e)} />
-              <span className="ml-2">Admin</span>
-            </Label>
-            <Label className="ml-6" radio>
+            <Input type="radio" value="0" name="role" onChange={(e) => onChange(e)} />
+            <span className="ml-2">Admin</span>
+          </Label>:
+          null}
+            {logedinuser.role == 0 ?
+              <Label className="ml-6" radio>
               <Input type="radio" value="1" name="role" onChange={(e) => onChange(e)} />
               <span className="ml-2">Project Owner</span>
-            </Label>
+            </Label> : null
+            }
             <Label className="ml-6" radio>
               <Input type="radio" value="2" name="role" onChange={(e) => onChange(e)} />
               <span className="ml-2">Team Member</span>

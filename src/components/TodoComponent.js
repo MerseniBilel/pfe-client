@@ -6,7 +6,7 @@ import {PdfIcon} from '../icons';
 import InfoCard from '../components/Cards/InfoCard';
 import RoundIcon from './RoundIcon';  
 import ChartCard from '../components/Chart/ChartCard'
-import {Bar } from 'react-chartjs-2'
+import {Doughnut } from 'react-chartjs-2'
 import ChartLegend from '../components/Chart/ChartLegend'
 import { Low, Meduim, Hight } from '../icons'
 import { connect } from 'react-redux';
@@ -15,8 +15,8 @@ import PropTypes from 'prop-types'
 import { addtasktoevent, initevnet } from '../actions/project' 
 
 import {
-    barOptions,
-    barLegends,
+    doughnutOptions,
+    doughnutLegends,
   } from '../utils/demo/chartsData'
 
 
@@ -82,6 +82,13 @@ const TodoComponent = ({ currentuser ,myproject, addtasktoevent, initevnet}) => 
         </div>
 
             <div className=" mt-4 flex">
+                <div>
+                <ChartCard title="Productivity">
+                    <Doughnut {...doughnutOptions} />
+                    <ChartLegend legends={doughnutLegends} />
+                </ChartCard>
+                </div>
+
                 <div className="flex-auto">
                     <Card className="mb-8 shadow-md">
                         <CardBody >
@@ -117,10 +124,6 @@ const TodoComponent = ({ currentuser ,myproject, addtasktoevent, initevnet}) => 
                 </div>
             </div>
 
-            <ChartCard title="productivity">
-                <Bar {...barOptions} />
-                <ChartLegend legends={barLegends} />
-            </ChartCard>
         </>
     )
 }

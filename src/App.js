@@ -22,18 +22,20 @@ function App() {
   },[]);
 
 
-  return (
-    <Provider store={store} >
-      <Router>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/forgot-password" component={ForgotPassword} />
-          <Route path="/app" component={Layout} />
-          <Redirect exact from="/" to="/login" />
-        </Switch>
-      </Router>
-    </Provider>
-  )
+    return (
+      <Provider store={store} >
+        <Router>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/forgot-password" component={ForgotPassword} />
+            <Route path="/app" component={Layout} />
+            <Redirect exact from="/" to="/login" />
+          </Switch>
+        </Router>
+      </Provider>
+    )
+  
+  
 }
 
 export default App

@@ -6,7 +6,7 @@ export const REMOVE_ALERT = 'REMOVE_ALERT'
 //login actions
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAIL = 'LOGIN_FAIL'
-
+export const LOGOUT = 'LOGOUT';
 //load user 
 export const USER_LOADED = 'USER_LOADED';
 export const USER_LOADED_ERROR ='USER_LOADED_ERROR';
@@ -43,7 +43,9 @@ export const TASKS_DELETED = 'TASKS_DELETED';
 
 
 
-//get all users action
+//get the current user events
+export const EVENTS_LOADED = 'EVENTS_LOADED'
+export const EVENTS_ERROR = 'EVENTS_ERROR'
 
 
 

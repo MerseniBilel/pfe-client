@@ -1,5 +1,5 @@
 import axios from "axios";
-import {LOGIN_SUCCESS,LOGIN_FAIL,USER_LOADED,USER_LOADED_ERROR} from './types';
+import {LOGIN_SUCCESS,LOGIN_FAIL,USER_LOADED,USER_LOADED_ERROR, LOGOUT,EVENTS_ERROR} from './types';
 import {setAlert} from './alert';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -61,5 +61,29 @@ export const LoginUser = ({ email , password}) => async dispatch =>{
         dispatch({
             type:LOGIN_FAIL
         })
+    }
+}
+
+//logout
+export const logout = (userid) => async dispatch =>{
+    const config ={
+        headers: {
+            'content-type': 'application/json'
+        }
+    }
+
+    const body = JSON.stringify({userid});
+
+    try {
+        
+        dispatch({
+            type: LOGOUT
+        });
+        dispatch({
+            type: EVENTS_ERROR
+        });
+        const res = await axios.post('/api/auth/logout',body,config);
+    } catch (error) {
+        console.error(error);
     }
 }

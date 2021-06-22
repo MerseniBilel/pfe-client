@@ -7,6 +7,7 @@ import dashboardAlert from './dashboardAlert';
 import project from './project'
 import currentProject from './currentProject'
 import tasks from './tasks'
+import events from './events'
 
 export default combineReducers({
     alert,
@@ -16,5 +17,6 @@ export default combineReducers({
     dashboardAlert,
     project,
     currentProject,
-    tasks
+    tasks,
+    events
 })

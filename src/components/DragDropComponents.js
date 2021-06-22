@@ -54,8 +54,7 @@ const DragDropComponents = ({data, myproject,addtask,deleteProject, updateProjec
     const projectownerid = myproject.projectOwner._id
     deleteProject({projectid,projectownerid})
     setdeleted(true)
-   
-  }
+   }
   const on3Submit = e => {
     e.preventDefault();
     const { projectid } = todelete
