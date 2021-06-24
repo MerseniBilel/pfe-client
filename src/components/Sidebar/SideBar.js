@@ -1,15 +1,29 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {adminroutes,projectownerroutes,teammemberroutes} from '../../routes/sidebar'
 import { NavLink, Route } from 'react-router-dom'
 import * as Icons from '../../icons'
-import { Button } from '@windmill/react-ui'
+import { Button} from '@windmill/react-ui'
+import { generatePdfFile } from '../../actions/productivity';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+
+
 
 function Icon({ icon, ...props }) {
     const Icon = Icons[icon]
     return <Icon {...props} />
 }
 
-const SideBar = ({userRole}) => {
+
+
+const SideBar = ({userRole,generatePdfFile}) => {
+  const generatepdffileHandler =() => {
+    generatePdfFile();
+    const newWindow = window.open("http://localhost:3000/uploads/statistics.pdf", '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
+  }
+    
+
     switch(userRole){
         case 1:
             return (
@@ -112,8 +126,9 @@ const SideBar = ({userRole}) => {
                       )
                     )}
                   </ul>
+
                   <div className="px-6 my-6">
-                    <Button>
+                    <Button onClick={generatepdffileHandler}>
                       Generate Log
                     </Button>
                 </div>
@@ -125,5 +140,10 @@ const SideBar = ({userRole}) => {
     }
 
 }
+SideBar.propTypes = {
+  generatePdfFile : PropTypes.func.isRequired,
+}
 
-export default SideBar
+export default connect(null,{generatePdfFile})(SideBar)
+
+

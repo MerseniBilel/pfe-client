@@ -6,6 +6,7 @@ import ChartLegend from './Chart/ChartLegend'
 import PageTitle from './Typography/PageTitle'
 import { ChatIcon, CartIcon, MoneyIcon, PeopleIcon } from '../icons'
 import RoundIcon from './RoundIcon'
+
 import {
   TableBody,
   TableContainer,
@@ -21,7 +22,6 @@ import {
 
 import {
   doughnutOptions,
-  lineOptions,
   doughnutLegends,
   lineLegends,
 } from '../utils/demo/chartsData'
@@ -45,6 +45,58 @@ function AdminDashboard(props) {
     setData(props.HomeData.allProjects.slice((page - 1) * resultsPerPage, page * resultsPerPage));
   }, [page])
 
+
+  const lineOptions = {
+    data: {
+      labels: ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"],
+      datasets: [
+        {
+          label: 'Completed Tasks',
+          backgroundColor: '#0694a2',
+          borderColor: '#0694a2',
+          data: [props.chartsData.finishChart['January'], props.chartsData.finishChart['February'], props.chartsData.finishChart['March'], props.chartsData.finishChart['April'], props.chartsData.finishChart['May'], props.chartsData.finishChart['June'], props.chartsData.finishChart['July'],props.chartsData.finishChart['August'],props.chartsData.finishChart['September'],props.chartsData.finishChart['October'],props.chartsData.finishChart['November'],props.chartsData.finishChart['December']],
+          fill: false,
+        },
+        {
+          label: 'Tasks Number',
+          fill: false,
+          backgroundColor: '#7e3af2',
+          borderColor: '#7e3af2',
+          data: [props.chartsData.pendingChart['January'], props.chartsData.pendingChart['February'], props.chartsData.pendingChart['March'], props.chartsData.pendingChart['April'], props.chartsData.pendingChart['May'], props.chartsData.pendingChart['June'], props.chartsData.pendingChart['July'],props.chartsData.pendingChart['August'],props.chartsData.pendingChart['September'],props.chartsData.pendingChart['October'],props.chartsData.pendingChart['November'],props.chartsData.pendingChart['December']],
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      tooltips: {
+        mode: 'index',
+        intersect: false,
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true,
+      },
+      scales: {
+        x: {
+          display: true,
+          scaleLabel: {
+            display: true,
+            labelString: 'Month',
+          },
+        },
+        y: {
+          display: true,
+          scaleLabel: {
+            display: true,
+            labelString: 'Value',
+          },
+        },
+      },
+    },
+    legend: {
+      display: true,
+    },
+  }
 
   return (
     

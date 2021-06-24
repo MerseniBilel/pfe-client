@@ -8,13 +8,15 @@ import RoundIcon from './RoundIcon';
 import { Link, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { addtask } from '../actions/tasks';
+import { addtask,getTasksByID } from '../actions/tasks';
 import { deleteProject,updateProject } from '../actions/project';
 import DashboardAlert from './DashboardAlert'
 import { TrashIcon, SettingIcon } from '../icons';
+import {LoadProjects, getProjectById} from '../actions/project';
 
 
-const DragDropComponents = ({data, myproject,addtask,deleteProject, updateProject}) => {
+
+const DragDropComponents = ({data, myproject,addtask,deleteProject, updateProject,getProjectById,getTasksByID}) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [is2ModalOpen, setIs2ModalOpen] = useState(false)
@@ -39,12 +41,6 @@ const DragDropComponents = ({data, myproject,addtask,deleteProject, updateProjec
   const onSubmit = e => {
     e.preventDefault();
     const {task,description,periority,deadline, projectId, projectOwner} = formData;
-    console.log(task)
-    console.log(description)
-    console.log(periority)
-    console.log(deadline)
-    console.log(projectId)
-    console.log(projectOwner)
     addtask({ task,description,periority,deadline, projectId, projectOwner });
   }
 
@@ -74,7 +70,8 @@ const DragDropComponents = ({data, myproject,addtask,deleteProject, updateProjec
 
   function closeModal() {
     setIsModalOpen(false)
-    window.location.reload(false);
+    getProjectById(myproject._id);
+    getTasksByID(myproject._id);
   }
   function close2Modal() {
     setIs2ModalOpen(false)
@@ -260,6 +257,9 @@ DragDropComponents.propTypes = {
   addtask:PropTypes.func.isRequired,
   deleteProject:PropTypes.func.isRequired,
   updateProject : PropTypes.func.isRequired,
+  LoadProjects : PropTypes.func.isRequired,
+  getProjectById : PropTypes.func.isRequired,
+  getTasksByID : PropTypes.func.isRequired,
 }
 
-export default connect(null,{addtask,deleteProject, updateProject})(DragDropComponents)
+export default connect(null,{addtask,deleteProject, updateProject,LoadProjects,getProjectById,getTasksByID})(DragDropComponents)

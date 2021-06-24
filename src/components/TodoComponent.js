@@ -15,12 +15,14 @@ import PropTypes from 'prop-types'
 import { addtasktoevent, initevnet } from '../actions/project' 
 
 import {
-    doughnutOptions,
     doughnutLegends,
   } from '../utils/demo/chartsData'
 
 
-const TodoComponent = ({ currentuser ,myproject, addtasktoevent, initevnet}) => {
+
+const TodoComponent = ({ currentuser ,myproject, addtasktoevent, initevnet,prod}) => {
+
+
     const [projectStarted, setprojectStarted] = useState(false)
 
     const openInNewTab = (url) => {
@@ -30,12 +32,33 @@ const TodoComponent = ({ currentuser ,myproject, addtasktoevent, initevnet}) => 
 
     function handlecheckbox (taskid) {
         const projectid = myproject._id
-        addtasktoevent({taskid,projectid});
+        const userid = currentuser._id
+        addtasktoevent({taskid,projectid,userid});
     }
 
     useEffect(() => {
         initevnet(myproject,currentuser);
     }, [])
+
+    const doughnutOptions = {
+        data: {
+          datasets: [
+            {
+              data: [prod.completed, prod.pending],
+              backgroundColor: ['#1c64f2','#0694a2'],
+              label: 'productivity',
+            },
+          ],
+          labels: ['Finished tasks', 'Pending tasks'],
+        },
+        options: {
+          responsive: true,
+          cutoutPercentage: 80,
+        },
+        legend: {
+          display: false,
+        },
+      }
 
     return (
         <>
@@ -82,13 +105,6 @@ const TodoComponent = ({ currentuser ,myproject, addtasktoevent, initevnet}) => 
         </div>
 
             <div className=" mt-4 flex">
-                <div>
-                <ChartCard title="Productivity">
-                    <Doughnut {...doughnutOptions} />
-                    <ChartLegend legends={doughnutLegends} />
-                </ChartCard>
-                </div>
-
                 <div className="flex-auto">
                     <Card className="mb-8 shadow-md">
                         <CardBody >
@@ -122,6 +138,12 @@ const TodoComponent = ({ currentuser ,myproject, addtasktoevent, initevnet}) => 
                         </CardBody>
                     </Card>
                 </div>
+                <div className='ml-4'>
+                <ChartCard title="Productivity">
+                    <Doughnut {...doughnutOptions} />
+                    <ChartLegend legends={doughnutLegends} />
+                </ChartCard>
+                </div>
             </div>
 
         </>
@@ -131,6 +153,11 @@ const TodoComponent = ({ currentuser ,myproject, addtasktoevent, initevnet}) => 
 TodoComponent.propTypes = {
     addtasktoevent : PropTypes.func.isRequired,
     initevnet :PropTypes.func.isRequired,
+    prod : PropTypes.object.isRequired,
 }
 
-export default connect(null,{addtasktoevent,initevnet})(TodoComponent)
+const mapStateToProps = state => ({
+    prod : state.productivity.productivity
+})
+
+export default connect(mapStateToProps,{addtasktoevent,initevnet})(TodoComponent)

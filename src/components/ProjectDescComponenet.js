@@ -4,11 +4,13 @@ import TodoComponent from './TodoComponent';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {  getTasksByID } from '../actions/tasks';
+import { getTeamMemberProductivity} from '../actions/productivity';
 
-const ProjectDescComponenet = ({myproject, currentuser ,getTasksByID,mytasks,isLoading}) => {
+const ProjectDescComponenet = ({myproject, currentuser ,getTasksByID,mytasks,isLoading,getTeamMemberProductivity}) => {
 
   useEffect(() => {
     getTasksByID(myproject._id)
+    getTeamMemberProductivity(currentuser._id)
   }, [])
 
   if(currentuser.role == 2){
@@ -32,6 +34,7 @@ ProjectDescComponenet.propTypes = {
   isLoading : PropTypes.bool.isRequired,
   mytasks : PropTypes.array.isRequired,
   getTasksByID : PropTypes.func.isRequired,
+  getTeamMemberProductivity : PropTypes.func.isRequired,
   
 }
 
@@ -41,4 +44,4 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps,{getTasksByID})(ProjectDescComponenet)
+export default connect(mapStateToProps,{getTasksByID,getTeamMemberProductivity})(ProjectDescComponenet)

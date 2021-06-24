@@ -8,6 +8,8 @@ import project from './project'
 import currentProject from './currentProject'
 import tasks from './tasks'
 import events from './events'
+import productivity from './productivity';
+import charts from './charts';
 
 export default combineReducers({
     alert,
@@ -18,5 +20,7 @@ export default combineReducers({
     project,
     currentProject,
     tasks,
-    events
+    events,
+    productivity,
+    charts
 })

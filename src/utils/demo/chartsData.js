@@ -4,8 +4,8 @@ export const doughnutLegends = [
 ]
 
 export const lineLegends = [
-  { title: 'Finished tasks', color: 'bg-teal-600' },
-  { title: 'Pending tasks', color: 'bg-purple-600' },
+  { title: 'Completed Tasks', color: 'bg-teal-600' },
+  { title: 'Tasks Number', color: 'bg-purple-600' },
 ]
 
 export const barLegends = [
@@ -38,10 +38,6 @@ export const lineOptions = {
     datasets: [
       {
         label: 'Organic',
-        /**
-         * These colors come from Tailwind CSS palette
-         * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
-         */
         backgroundColor: '#0694a2',
         borderColor: '#0694a2',
         data: [3, 3, 4, 5, 3, 6, 7],
@@ -50,10 +46,6 @@ export const lineOptions = {
       {
         label: 'Paid',
         fill: false,
-        /**
-         * These colors come from Tailwind CSS palette
-         * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
-         */
         backgroundColor: '#7e3af2',
         borderColor: '#7e3af2',
         data: [2, 5, 6, 7, 5, 5, 6],

@@ -2,6 +2,7 @@ import axios from "axios";
 import {TASKS_LOADED,TASKS_ERROR} from './types';
 import setAuthToken from '../utils/setAuthToken';
 import {dashboardAlert} from './dashboardAlert';
+import {loadChartData} from './adminHomePage'
 
 
 //get project tasks 
@@ -39,6 +40,8 @@ export const addtask = ({task,description,periority,deadline, projectId, project
     const body = JSON.stringify({ task,description, periority,deadline,projectId,projectOwner});
 
     try {
+        const chart = await axios.get('/api/productivity/pending');
+        dispatch(loadChartData())
         const res = await axios.post('/api/tasks/',body, config);
         dispatch(getTasksByID(projectId));
         dispatch(dashboardAlert('Task added, drag it to the user ','green'));

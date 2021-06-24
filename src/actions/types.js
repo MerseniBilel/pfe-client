@@ -50,4 +50,8 @@ export const EVENTS_ERROR = 'EVENTS_ERROR'
 
 
 
-//send notification action
+//productivityCharts
+export const TEAMMEMBER_CHARTS = 'TEAMMEMBER_CHARTS'
+export const CLEARTEAMMEMBER_CHARTS = 'CLEARTEAMMEMBER_CHARTS'
+
+export const DASHBOARDCHARTS = 'DASHBOARDCHARTS'

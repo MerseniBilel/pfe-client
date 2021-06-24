@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 //redux
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {loadAdminData} from '../actions/adminHomePage';
+import {loadAdminData,loadChartData} from '../actions/adminHomePage';
 
 
 
@@ -11,18 +11,19 @@ import {loadAdminData} from '../actions/adminHomePage';
 import AdminDashboard from '../components/AdminDashboard';
 
 
-function Dashboard({loadAdminData, homePageData,isLoading,logedinUser,userloaded }) {
+function Dashboard({loadAdminData,loadChartData, homePageData,isLoading,chartsData }) {
   
 
 
   useEffect(() => {
+    loadChartData();
     loadAdminData();
   }, [])
   
   
   return (    
     <>
-     { isLoading ? <div>LOADING .... </div> : <AdminDashboard HomeData={homePageData} /> }
+     { isLoading ? <div>LOADING .... </div> : <AdminDashboard  chartsData={chartsData} HomeData={homePageData} /> }
     </>
             
   )
@@ -34,6 +35,9 @@ Dashboard.propTypes = {
   isLoading:PropTypes.bool.isRequired,
   logedinUser : PropTypes.object.isRequired,
   userloaded : PropTypes.bool.isRequired,
+  loadChartData : PropTypes.func.isRequired,
+  chartsData : PropTypes.object.isRequired,
+
 }
 
 
@@ -41,7 +45,9 @@ const mapStateToProps = state => ({
   isLoading : state.adminHomePage.loading,
   homePageData : state.adminHomePage.data,
   logedinUser : state.auth.user,
-  userloaded : state.auth.loading
+  userloaded : state.auth.loading,
+  chartsData : state.charts.productivity,
+
 })
 
-export default connect(mapStateToProps,{loadAdminData})(Dashboard)
+export default connect(mapStateToProps,{loadAdminData, loadChartData})(Dashboard)

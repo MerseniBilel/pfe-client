@@ -2,8 +2,8 @@ import axios from 'axios';
 import {PROJECTS_LOADED, CURRENTPROJECT_LOADED} from './types'
 import setAuthToken from '../utils/setAuthToken';
 import {dashboardAlert} from './dashboardAlert';
-
-
+import {getTeamMemberProductivity} from './productivity'
+import {loadChartData} from './adminHomePage'
 //LOAD ALL PROJECTS
 export const LoadProjects = () => async dispatch => {
     if(localStorage.token){
@@ -117,7 +117,7 @@ export const deleteProject = ({projectid, projectownerid}) => async dispatch => 
 }
 
 //add finish task to event
-export const addtasktoevent = ({taskid, projectid}) => async dispatch => {
+export const addtasktoevent = ({taskid, projectid,userid}) => async dispatch => {
     const config ={
         headers: {
             'content-type': 'application/json'
@@ -126,7 +126,7 @@ export const addtasktoevent = ({taskid, projectid}) => async dispatch => {
     try{
         //update task to conpleted when check box
         const res = await axios.put(`/api/projs/task/${taskid}`);
-
+        const chart = await axios.get('/api/productivity/completed');
         // get the task id
         const task = await axios.get(`/api/tasks/task/${projectid}`)
         const result = task.data[0].tasks.filter(tt => tt._id == taskid);
@@ -136,6 +136,8 @@ export const addtasktoevent = ({taskid, projectid}) => async dispatch => {
         const body = JSON.stringify({ taskdescription , finishdate});
         await axios.post('/api/event/update',body,config);
         dispatch(getProjectById(projectid))
+        dispatch(getTeamMemberProductivity(userid))
+        dispatch(loadChartData())
     }catch(error){
         console.log(error);
     }

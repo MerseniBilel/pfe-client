@@ -62,7 +62,6 @@ const DragNDrop = ({data,updateTasks}) => {
     }
 
     if(!Dragging){
-        console.log(list);
         updateTasks(list);
     }
 
